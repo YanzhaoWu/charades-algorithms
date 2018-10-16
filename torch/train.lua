@@ -191,11 +191,15 @@ end
 local function mAP(conf, gt)
     local so,sortind = torch.sort(conf, 1, true) --desc order
     local tp = gt:index(1,sortind:view(-1)):eq(1):int()
+    print(tp)
     local fp = gt:index(1,sortind:view(-1)):eq(0):int()
+    print(fp)
     local npos = torch.sum(tp)
 
     fp = torch.cumsum(fp)
     tp = torch.cumsum(tp)
+    print(('True positive: %d'):format(tp))
+    print(('False positive: %d'):format(fp))
     local rec = tp:float()/npos
     local prec = torch.cdiv(tp:float(),(fp+tp):float())
     
@@ -268,7 +272,7 @@ function Trainer:test2(opt, epoch, dataloader)
       local output = self.model:forward(self.input):float()
       local batchSize = 25
 
-      for i=1,25-1 do -- make sure there is no error in the loader, this should be one video
+      for i=1,batchSize-1 do -- make sure there is no error in the loader, this should be one video
           assert(torch.all(torch.eq(
               sample.target[{{i},{}}],
               sample.target[{{i+1},{}}]
@@ -282,12 +286,12 @@ function Trainer:test2(opt, epoch, dataloader)
       table.insert(names,sample.ids[1])
 
       if opt.dumpLocalize then
-          frameoutputs[{{nframe+1,nframe+25},{}}] = tmp
-          for b=1,25 do
+          frameoutputs[{{nframe+1,nframe+batchSize},{}}] = tmp
+          for b=1, batchSize do
               framenames[nframe+b] = sample.ids[1]
               framenr[nframe+b] = b
           end
-          nframe = nframe+25
+          nframe = nframe+batchSize
       end
 
       print(('%s | Test2: [%d][%d/%d]    Time %.3f  Data %.3f'):format(

@@ -50,7 +50,7 @@ local function prepare(opt,labels,split)
     assert(paths.dirp(dir), 'directory not found: ' .. dir)
     local imagePaths, imageClasses, ids = {}, {}, {}
     local FPS, GAP, testGAP = 24, 4, 25
-    local e,count = 0, 0
+    local e, count = 0, 0
     
     -- For each video annotation, prepare test files
     local imageClasses2
