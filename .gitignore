@@ -2,3 +2,11 @@ gen/
 libnccl.so
 model_best.t7
 checkpoints
+
+*.caffemodel
+*.prototxt
+*.prototxt.lua
+/torch/cache/rgbnet_test/
+cudnn.torch/
+*.t7
+

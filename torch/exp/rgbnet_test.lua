@@ -27,11 +27,11 @@ morearg = {
 '-batchSize','64',
 '-accumGrad','4',
 '-testOnly','true',
-'-retrain','/mnt/raid00/gunnars/cache/flownet/checkpoints/model_9.t7', -- path to the trained model to use
-'-cacheDir','/mnt/raid00/gunnars/cache/',
-'-data','/mnt/raid00/gunnars/Charades_v1_rgb/',
-'-trainfile','../Charades_v1_train.csv',
-'-testfile','../Charades_v1_test.csv',
+'-retrain','twostream_rgb.t7', -- path to the trained model to use
+'-cacheDir','./cache/',
+'-data','/home/yanzhaowu/research/video_detection/Charades_small/Charades_v1_rgb/',
+'-trainfile','/home/yanzhaowu/research/video_detection/Charades_small/Charades_v1_train.csv',
+'-testfile','/home/yanzhaowu/research/video_detection/Charades_small/Charades_v1_test.csv',
 '-optnet','true',
 }
 for _,v in pairs(morearg) do
